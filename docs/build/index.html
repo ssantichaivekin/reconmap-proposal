@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Proposal of ReconGraph structure! &#8212; reconmap-proposal  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-proposal-of-recongraph-structure">
+<h1>Welcome to Proposal of ReconGraph structure!<a class="headerlink" href="#welcome-to-proposal-of-recongraph-structure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Creating the data structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Old dictionary structure</span>
+<span class="n">old_recon_graph</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">):</span> <span class="p">[(</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;n2&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;n1&#39;</span><span class="p">,</span> <span class="s1">&#39;m4&#39;</span><span class="p">))],</span>
+    <span class="p">(</span><span class="s1">&#39;n1&#39;</span><span class="p">,</span> <span class="s1">&#39;m4&#39;</span><span class="p">):</span> <span class="p">[(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))],</span>
+    <span class="p">(</span><span class="s1">&#39;n2&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">):</span> <span class="p">[(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;n3&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">))],</span>
+    <span class="p">(</span><span class="s1">&#39;n3&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">):</span> <span class="p">[(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))],</span>
+    <span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">):</span> <span class="p">[(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))],</span>
+<span class="p">}</span>
+
+<span class="c1"># New ReconGraph structure</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">)</span>
+<span class="n">recongraph</span> <span class="o">=</span> <span class="n">ReconGraph</span><span class="p">(</span><span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="n">source</span><span class="p">])</span>
+<span class="n">recongraph</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">),</span> <span class="n">Cospeciation</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n2&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n1&#39;</span><span class="p">,</span> <span class="s1">&#39;m4&#39;</span><span class="p">)))</span>
+<span class="n">recongraph</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n1&#39;</span><span class="p">,</span> <span class="s1">&#39;m4&#39;</span><span class="p">),</span> <span class="n">TipTip</span><span class="p">())</span>
+<span class="n">recongraph</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n2&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">Transfer</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n3&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">)))</span>
+<span class="n">recongraph</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n3&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">TipTip</span><span class="p">())</span>
+<span class="n">recongraph</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">),</span> <span class="n">TipTip</span><span class="p">())</span>
+
+<span class="c1"># New (single) Reconciliation structure</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">)</span>
+<span class="n">recon</span> <span class="o">=</span> <span class="n">Reconciliation</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+<span class="n">recon</span><span class="o">.</span><span class="n">set_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">),</span> <span class="n">Cospeciation</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n2&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n1&#39;</span><span class="p">,</span> <span class="s1">&#39;m4&#39;</span><span class="p">)))</span>
+<span class="n">recon</span><span class="o">.</span><span class="n">set_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n1&#39;</span><span class="p">,</span> <span class="s1">&#39;m4&#39;</span><span class="p">),</span> <span class="n">TipTip</span><span class="p">())</span>
+<span class="n">recon</span><span class="o">.</span><span class="n">set_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n2&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">Transfer</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n3&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">)))</span>
+<span class="n">recon</span><span class="o">.</span><span class="n">set_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n3&#39;</span><span class="p">,</span> <span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="n">TipTip</span><span class="p">())</span>
+<span class="n">recon</span><span class="o">.</span><span class="n">set_event</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">),</span> <span class="n">TipTip</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Checking whether the mapping <code class="docutils literal notranslate"><span class="pre">('n1',</span> <span class="pre">'m4')</span></code> has a cospeciation event:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Old dictionary structure</span>
+<span class="n">has_cospeciation</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">old_recon_graph</span><span class="p">[</span><span class="n">mapping</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>
+        <span class="n">has_cospeciation</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">break</span>
+
+<span class="c1"># New ReconGraph structure</span>
+<span class="n">has_cospeciation</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">recongraph</span><span class="o">.</span><span class="n">events_of</span><span class="p">(</span><span class="n">mapping</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">event_type</span> <span class="ow">is</span> <span class="n">EventType</span><span class="o">.</span><span class="n">COSPECIATION</span><span class="p">:</span>
+        <span class="n">has_cospeciation</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">break</span>
+
+<span class="c1"># New (single) Reconciliation structure</span>
+<span class="n">is_cospeciation</span> <span class="o">=</span> <span class="n">recon</span><span class="o">.</span><span class="n">event_of</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n0&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">event_type</span> <span class="ow">is</span> <span class="n">EventType</span><span class="o">.</span><span class="n">COSPECIATION</span>
+</pre></div>
+</div>
+<p>Getting the source mapping node:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Old dictionary structure requires passing the source mapping node around</span>
+
+<span class="c1"># New ReconGraph structure</span>
+<span class="n">sources</span> <span class="o">=</span> <span class="n">recongraph</span><span class="o">.</span><span class="n">sources</span>
+
+<span class="c1"># New (single) Reconciliation structure</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">recon</span><span class="o">.</span><span class="n">source</span>
+</pre></div>
+</div>
+<p>Checking whether <code class="docutils literal notranslate"><span class="pre">('n4',</span> <span class="pre">'m1')</span></code> is a sink:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Old dictionary structure</span>
+<span class="n">mapping_is_sink</span> <span class="o">=</span> <span class="n">old_recon_graph</span><span class="p">[(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">)][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span>
+
+<span class="c1"># New ReconGraph structure</span>
+<span class="n">mapping_is_sink</span> <span class="o">=</span> <span class="n">recongraph</span><span class="o">.</span><span class="n">is_sink</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">))</span>
+
+<span class="c1"># New (single) Reconciliation structure</span>
+<span class="n">mapping_is_sink</span> <span class="o">=</span> <span class="n">recon</span><span class="o">.</span><span class="n">is_sink</span><span class="p">(</span><span class="n">MappingNode</span><span class="p">(</span><span class="s1">&#39;n4&#39;</span><span class="p">,</span> <span class="s1">&#39;m1&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Note that property <code class="docutils literal notranslate"><span class="pre">p</span></code> of a class <code class="docutils literal notranslate"><span class="pre">C</span></code> means you can access it with <code class="docutils literal notranslate"><span class="pre">C.p</span></code> without parenthesis</p>
+<span class="target" id="module-recon"></span><p>A Proposal for reconciliation graph and reconciliation interface.</p>
+<dl class="py class">
+<dt id="recon.MappingNode">
+<em class="property">class </em><code class="sig-name descname">MappingNode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parasite_vertex</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">host_vertex</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.MappingNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>MappingNode is a node in the reconciliation graph that maps
+a parasite to a host.</p>
+<dl class="py method">
+<dt id="recon.MappingNode.host">
+<em class="property">property </em><code class="sig-name descname">host</code><a class="headerlink" href="#recon.MappingNode.host" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.MappingNode.parasite">
+<em class="property">property </em><code class="sig-name descname">parasite</code><a class="headerlink" href="#recon.MappingNode.parasite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.EventType">
+<em class="property">class </em><code class="sig-name descname">EventType</code><a class="headerlink" href="#recon.EventType" title="Permalink to this definition">¶</a></dt>
+<dd><p>EventType is the type of event node.</p>
+<dl class="py attribute">
+<dt id="recon.EventType.COSPECIATION">
+<code class="sig-name descname">COSPECIATION</code><em class="property"> = 1</em><a class="headerlink" href="#recon.EventType.COSPECIATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="recon.EventType.DUPLICATION">
+<code class="sig-name descname">DUPLICATION</code><em class="property"> = 2</em><a class="headerlink" href="#recon.EventType.DUPLICATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="recon.EventType.LOSS">
+<code class="sig-name descname">LOSS</code><em class="property"> = 4</em><a class="headerlink" href="#recon.EventType.LOSS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="recon.EventType.TIPTIP">
+<code class="sig-name descname">TIPTIP</code><em class="property"> = 5</em><a class="headerlink" href="#recon.EventType.TIPTIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="recon.EventType.TRANSFER">
+<code class="sig-name descname">TRANSFER</code><em class="property"> = 3</em><a class="headerlink" href="#recon.EventType.TRANSFER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.Event">
+<em class="property">class </em><code class="sig-name descname">Event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">freq</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base Class for events.</p>
+<dl class="py method">
+<dt id="recon.Event.event_type">
+<em class="property">property </em><code class="sig-name descname">event_type</code><a class="headerlink" href="#recon.Event.event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the event type of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Event.freq">
+<em class="property">property </em><code class="sig-name descname">freq</code><a class="headerlink" href="#recon.Event.freq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.Cospeciation">
+<em class="property">class </em><code class="sig-name descname">Cospeciation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">left</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">right</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Cospeciation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cospeciation is an event where two children of the parasite vertex
+maps to the two children of the host vertex. Cospeciation event has
+two child MappingNode named left and right.</p>
+<dl class="py method">
+<dt id="recon.Cospeciation.event_type">
+<em class="property">property </em><code class="sig-name descname">event_type</code><a class="headerlink" href="#recon.Cospeciation.event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the event type of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Cospeciation.freq">
+<em class="property">property </em><code class="sig-name descname">freq</code><a class="headerlink" href="#recon.Cospeciation.freq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.Cospeciation.left">
+<em class="property">property </em><code class="sig-name descname">left</code><a class="headerlink" href="#recon.Cospeciation.left" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.Cospeciation.right">
+<em class="property">property </em><code class="sig-name descname">right</code><a class="headerlink" href="#recon.Cospeciation.right" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.Duplication">
+<em class="property">class </em><code class="sig-name descname">Duplication</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">left</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">right</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Duplication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplication is an event where two children of the parasite vertex
+maps to the same host vertex as their parent. Cospeciation event has
+two child MappingNode named left and right.</p>
+<dl class="py method">
+<dt id="recon.Duplication.event_type">
+<em class="property">property </em><code class="sig-name descname">event_type</code><a class="headerlink" href="#recon.Duplication.event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the event type of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Duplication.freq">
+<em class="property">property </em><code class="sig-name descname">freq</code><a class="headerlink" href="#recon.Duplication.freq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.Duplication.left">
+<em class="property">property </em><code class="sig-name descname">left</code><a class="headerlink" href="#recon.Duplication.left" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.Duplication.right">
+<em class="property">property </em><code class="sig-name descname">right</code><a class="headerlink" href="#recon.Duplication.right" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.Transfer">
+<em class="property">class </em><code class="sig-name descname">Transfer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">left</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">right</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfer is an event where one child of the parasite vertex
+maps to the same host vertex as its parent, while the other child maps 
+to a host vertex not ancestrally related to the first one. Transfer event 
+has two child MappingNode named left and right. The right child is always
+the child that gets transferred.</p>
+<dl class="py method">
+<dt id="recon.Transfer.event_type">
+<em class="property">property </em><code class="sig-name descname">event_type</code><a class="headerlink" href="#recon.Transfer.event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the event type of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Transfer.freq">
+<em class="property">property </em><code class="sig-name descname">freq</code><a class="headerlink" href="#recon.Transfer.freq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.Transfer.left">
+<em class="property">property </em><code class="sig-name descname">left</code><a class="headerlink" href="#recon.Transfer.left" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.Transfer.right">
+<em class="property">property </em><code class="sig-name descname">right</code><a class="headerlink" href="#recon.Transfer.right" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.Loss">
+<em class="property">class </em><code class="sig-name descname">Loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">child</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss is an event where the parasite vertex goes down to only one of 
+the lineage of the host vertex when the host vertex speciates. Loss event
+has one child MappingNode called child. The parasite of the child MappingNode
+(self.child.parasite) is the same as the parasite of the MappingNode that
+incurs the lost.</p>
+<dl class="py method">
+<dt id="recon.Loss.child">
+<em class="property">property </em><code class="sig-name descname">child</code><a class="headerlink" href="#recon.Loss.child" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="recon.Loss.event_type">
+<em class="property">property </em><code class="sig-name descname">event_type</code><a class="headerlink" href="#recon.Loss.event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the event type of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Loss.freq">
+<em class="property">property </em><code class="sig-name descname">freq</code><a class="headerlink" href="#recon.Loss.freq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.TipTip">
+<em class="property">class </em><code class="sig-name descname">TipTip</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">freq</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.TipTip" title="Permalink to this definition">¶</a></dt>
+<dd><p>TipTip (tip mapping) is an event where both the parasite and the host are 
+leaves. Biologically, this means the parasite and the host lives together
+at present time. The TipTip event is the sink of the reconciliation graph and
+has no children.</p>
+<dl class="py method">
+<dt id="recon.TipTip.event_type">
+<em class="property">property </em><code class="sig-name descname">event_type</code><a class="headerlink" href="#recon.TipTip.event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the event type of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.TipTip.freq">
+<em class="property">property </em><code class="sig-name descname">freq</code><a class="headerlink" href="#recon.TipTip.freq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.Reconciliation">
+<em class="property">class </em><code class="sig-name descname">Reconciliation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">initial_map</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a><span class="p">, </span><a class="reference internal" href="#recon.Event" title="recon.Event">recon.Event</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Reconciliation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconciliation is a tree that represents an edge-to-edge mapping from 
+a parasite tree to a host tree. The Reconciliation starts with source
+MappingNode where the parasite first enters the host. Each MappingNode
+has one corresponding Event. Each event has up to two children MappingNode
+depending on its type. The leaves of the tree are the TipTip events which
+have no children MappingNode.</p>
+<dl class="py method">
+<dt id="recon.Reconciliation.event_of">
+<code class="sig-name descname">event_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#recon.Event" title="recon.Event">recon.Event</a><a class="headerlink" href="#recon.Reconciliation.event_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the event corresponding to mapping.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Reconciliation.is_sink">
+<code class="sig-name descname">is_sink</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#recon.Reconciliation.is_sink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the host and the parasite of the mapping are leaves of its
+phylogenic tree with a tip mapping.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Reconciliation.load">
+<em class="property">static </em><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#recon.Reconciliation" title="recon.Reconciliation">recon.Reconciliation</a><a class="headerlink" href="#recon.Reconciliation.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a Reconciliation from path, e.g. <code class="docutils literal notranslate"><span class="pre">Reconciliation.load('./reconname')</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Reconciliation.mapping_of">
+<code class="sig-name descname">mapping_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parasite</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a><a class="headerlink" href="#recon.Reconciliation.mapping_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the MappingNode of the parasite vertex. This is where that
+parasite vertex maps to. Never returns a mapping node that corresponds
+to a loss event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Reconciliation.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Reconciliation.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the Reconciliation to path, e.g. <code class="docutils literal notranslate"><span class="pre">recon.save('./reconname')</span></code>
+This will save the Reconciliation along with the metadata if metadata
+is specified, e.g. <code class="docutils literal notranslate"><span class="pre">recon.save('./reconname',</span> <span class="pre">{'created_at':</span> <span class="pre">'Noon'})</span></code>.
+The metadata is only for book-keeping purposes and is not read when load.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.Reconciliation.set_event">
+<code class="sig-name descname">set_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">event</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.Event" title="recon.Event">recon.Event</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.Reconciliation.set_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the event corresponding to mapping.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="recon.ReconGraph">
+<em class="property">class </em><code class="sig-name descname">ReconGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sources</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">initial_map</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a><span class="p">, </span>List<span class="p">[</span><a class="reference internal" href="#recon.Event" title="recon.Event">recon.Event</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.ReconGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>ReconGraph is a directed acyclic graph that compactlyrepresent multiple 
+Reconciliations. The Reconciliation starts with a list of source MappingNode
+where the parasite first enters the host. Each MappingNode has a list of 
+corresponding Event. Each event has up to two children MappingNode
+depending on its type. The sinks of this graph are the TipTip events which
+have no children MappingNode.</p>
+<dl class="py method">
+<dt id="recon.ReconGraph.add_event">
+<code class="sig-name descname">add_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">event</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.Event" title="recon.Event">recon.Event</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.ReconGraph.add_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an event corresponding to mapping.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.ReconGraph.enumerate">
+<code class="sig-name descname">enumerate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#recon.Reconciliation" title="recon.Reconciliation">recon.Reconciliation</a><span class="p">]</span><a class="headerlink" href="#recon.ReconGraph.enumerate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all Reconciliation represented in this ReconGraph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.ReconGraph.events_of">
+<code class="sig-name descname">events_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#recon.Event" title="recon.Event">recon.Event</a><span class="p">]</span><a class="headerlink" href="#recon.ReconGraph.events_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of events corresponding to mapping.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.ReconGraph.is_sink">
+<code class="sig-name descname">is_sink</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#recon.ReconGraph.is_sink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the host and the parasite of the mapping are leaves of its
+phylogenic tree with a tip mapping.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.ReconGraph.load">
+<em class="property">static </em><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#recon.ReconGraph" title="recon.ReconGraph">recon.ReconGraph</a><a class="headerlink" href="#recon.ReconGraph.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a Reconciliation from path, e.g. <code class="docutils literal notranslate"><span class="pre">Reconciliation.load('./reconname')</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.ReconGraph.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.ReconGraph.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the ReconGraph to path, e.g. <code class="docutils literal notranslate"><span class="pre">recon.save('./reconname')</span></code>
+This will save the reconciliation graph along with the metadata if metadata
+is specified, e.g. <code class="docutils literal notranslate"><span class="pre">recon.save('./reconname',</span> <span class="pre">{'created_at':</span> <span class="pre">'Noon'})</span></code>.
+The metadata is only for book-keeping purposes and is not read when load.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="recon.ReconGraph.set_events">
+<code class="sig-name descname">set_events</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#recon.MappingNode" title="recon.MappingNode">recon.MappingNode</a></span></em>, <em class="sig-param"><span class="n">events</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#recon.Event" title="recon.Event">recon.Event</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#recon.ReconGraph.set_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a mapping to correspond to a list of events.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">reconmap-proposal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Santi Santichaivekin.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
