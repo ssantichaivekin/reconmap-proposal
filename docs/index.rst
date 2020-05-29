@@ -6,6 +6,8 @@
 Welcome to Proposal of ReconGraph structure!
 =============================================
 
+`See Github repository <https://github.com/ssantichaivekin/reconmap-proposal>`_
+
 Examples
 --------
 Creating the data structure::
@@ -78,6 +80,12 @@ Checking whether ``('n4', 'm1')`` is a sink::
 
    # New (single) Reconciliation structure
    mapping_is_sink = recon.is_sink(MappingNode('n4', 'm1'))
+
+Using the converter in ``converter.py`` to convert the old format to the new format::
+
+   recongraph = converter.dict_to_recongraph(old_recon_graph)
+
+   recon = converter.dict_to_reconciliation(old_recon_graph)
 
 Documentation
 -------------
