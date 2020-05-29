@@ -3,4 +3,3 @@ python_version = '3.7'
 
 [packages]
 sphinx = "*"
-sphinx-autodoc-typehints = "*"
