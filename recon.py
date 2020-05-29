@@ -140,7 +140,7 @@ class Loss(Event):
     incurs the lost.
     """
 
-    def __init__(self, child: MappingNode, freq = None):
+    def __init__(self, child: MappingNode, freq=None):
         """
         Creates a Loss event. The lost event has one child MappingNode
         called child.
@@ -206,7 +206,7 @@ class Reconciliation:
         self._parasite_map: Dict[str, MappingNode] = {}
     
     def __eq__(self, other):
-        return type(self) == type(other) and self._map == other.map
+        return type(self) == type(other) and self._map == other._map
     
     def __repr__(self):
         return "%s(source=%s, %s)" % (type(self).__name__, self.source, self._map)
@@ -274,7 +274,7 @@ class ReconGraph:
         self._map = initial_map
     
     def __eq__(self, other):
-        return type(self) == type(other) and self._map == other.map
+        return type(self) == type(other) and self._map == other._map
     
     def __repr__(self):
         return "%s(sources=%s, %s)" % (type(self).__name__, self.sources, self._map)
