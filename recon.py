@@ -104,7 +104,7 @@ class Cospeciation(TwoChildrenEvent):
     """
 
     @property
-    def event_type(self) -> EventType.COSPECIATION:
+    def event_type(self) -> EventType:
         return EventType.COSPECIATION
 
 class Duplication(TwoChildrenEvent):
