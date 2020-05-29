@@ -23,12 +23,12 @@ def _find_roots(old_recon_graph) -> List[MappingNode]:
             roots.append(mapping)
     return roots
 
-def dict_to_reconciliation(old_recon_graph: Dict[Tuple, List]):
+def dict_to_reconciliation(old_recon: Dict[Tuple, List]):
     """
     Convert the old reconciliation graph format to Reconciliation.
 
     Example of old format:
-    old_recon_graph = {
+    old_recon = {
         ('n0', 'm2'): [('S', ('n2', 'm3'), ('n1', 'm4'))],
         ('n1', 'm4'): [('C', (None, None), (None, None))],
         ('n2', 'm3'): [('T', ('n3', 'm3'), ('n4', 'm1'))],
@@ -36,16 +36,16 @@ def dict_to_reconciliation(old_recon_graph: Dict[Tuple, List]):
         ('n4', 'm1'): [('C', (None, None), (None, None))],
     }
     """
-    roots = _find_roots(old_recon_graph)
+    roots = _find_roots(old_recon)
     if len(roots) > 1:
-        raise ValueError("recon_graph has many roots")
+        raise ValueError("old_recon has many roots")
     root = roots[0]
     recon = Reconciliation(root)
-    for mapping in old_recon_graph:
+    for mapping in old_recon:
         host, parasite = mapping
-        if len(old_recon_graph[mapping]) != 1:
-            raise ValueError('old_recon_graph mapping node has no event or multiple events')
-        etype, left, right = old_recon_graph[mapping][0]
+        if len(old_recon[mapping]) != 1:
+            raise ValueError('old_recon mapping node has no or multiple events')
+        etype, left, right = old_recon[mapping][0]
         mapping_node = MappingNode(host, parasite)
         if etype in 'SDT':
             left_parasite, left_host = left
