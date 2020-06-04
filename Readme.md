@@ -4,7 +4,7 @@ A proposal to change the old version of reconciliation graph dictionary to a cla
 The code for the data structures are in `recon.py`. The code to change the old version dict to the new `ReconGraph` or 
 `Reconciliation` is in `examples.py`.
 
-The documentation is in [Read The Docs](https://github.com/ssantichaivekin/reconmap-proposal).
+The documentation is in [Read The Docs](https://reconmap-proposal.readthedocs.io/en/latest/).
 
 ```python
 # Old dictionary structure
